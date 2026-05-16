@@ -10,7 +10,6 @@ Usage:
 """
 
 import argparse
-import hashlib
 import os
 import re
 import sqlite3
@@ -454,7 +453,7 @@ def retrieve(query, max_results=5, max_tokens=2000, agent=None, project=None):
     # Deduplicate
     deduped_entries = deduplicate([e for _, e in scored])
     # Reattach scores
-    score_map = {id(e): s for s, e in scored}
+    {id(e): s for s, e in scored}
     # Rebuild scored list preserving dedup order
     final = []
     for e in deduped_entries:

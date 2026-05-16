@@ -1,6 +1,6 @@
 """Wrapper entry point for export-training.py console script."""
-from pathlib import Path
 import runpy
+from pathlib import Path
 
 
 def main():

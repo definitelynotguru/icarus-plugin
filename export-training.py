@@ -252,7 +252,7 @@ def extract_pairs(entries):
             add_pair(user_msg, body, {**base_meta, "type": "dialogue"})
 
         elif entry_type == "decision":
-            user_msg = f"[decision] What did you decide?"
+            user_msg = "[decision] What did you decide?"
             add_pair(user_msg, body, {**base_meta, "type": "decision"})
 
         elif entry_type == "session":
@@ -268,11 +268,11 @@ def extract_pairs(entries):
                     )
             # generic session pairs are much noisier; only keep when grounded
             if verified or tv == "high" or has_evidence:
-                user_msg = f"[session] Summarize what was accomplished."
+                user_msg = "[session] Summarize what was accomplished."
                 add_pair(user_msg, body, {**base_meta, "type": "session"})
 
         elif entry_type == "review":
-            user_msg = f"[review] Review the following code or work."
+            user_msg = "[review] Review the following code or work."
             add_pair(user_msg, body, {**base_meta, "type": "review"})
 
         else:
@@ -291,7 +291,7 @@ def extract_pairs(entries):
                 if not orig:
                     continue
                 # Find revision: must explicitly ref back to the review or original
-                review_file = e.get("file", "")
+                e.get("file", "")
                 orig_file = orig.get("file", "")
                 ref_agent = ref.split(":")[0] if ":" in ref else ""
                 candidates = []
@@ -538,11 +538,11 @@ def main():
     print(f"  source entries:    {len(entries)} selected / {len(all_entries)} total ({excluded} excluded)")
     print(f"  do-not-train:      {do_not_train_excluded} excluded")
     print(f"  redaction:         {redaction_report.get('pairs_redacted', 0)} pairs redacted")
-    print(f"  by type:")
+    print("  by type:")
     for t, c in sorted(type_counts.items()):
         print(f"    {t}: {c}")
     if not args.dry_run:
-        print(f"  files:")
+        print("  files:")
         print(f"    {out}/openai.jsonl")
         print(f"    {out}/together.jsonl")
         print(f"    {out}/hf-dataset.jsonl")

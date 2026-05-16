@@ -1,7 +1,7 @@
 import json
 from concurrent.futures import ThreadPoolExecutor
 
-from storage import append_jsonl, atomic_write_json, atomic_write_text, file_lock
+from storage import append_jsonl, atomic_write_json, atomic_write_text
 
 
 def test_atomic_write_text(tmp_path):

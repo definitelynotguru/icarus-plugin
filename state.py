@@ -8,8 +8,8 @@ import secrets
 import shutil
 import subprocess
 import tempfile
-import urllib.request
 import urllib.error
+import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -844,7 +844,7 @@ def check_training(job_id=None):
             m["status"] = "completed"
             m["output_model"] = data.get("model_output_name", "")
             result["model_id"] = m["output_model"]
-            result["instruction"] = f"Run fabric_eval to test, then fabric_switch_model to activate."
+            result["instruction"] = "Run fabric_eval to test, then fabric_switch_model to activate."
         elif data.get("status") in ("failed", "cancelled", "error"):
             m["status"] = data["status"]
             result["error"] = data.get("error", "unknown")
@@ -1005,9 +1005,9 @@ def rollback_model():
     # read what we're rolling back from
     current_model = None
     if env_file.exists():
-        for l in env_file.read_text("utf-8").split("\n"):
-            if l.startswith("LLM_MODEL="):
-                current_model = l.split("=", 1)[1].strip()
+        for line in env_file.read_text("utf-8").split("\n"):
+            if line.startswith("LLM_MODEL="):
+                current_model = line.split("=", 1)[1].strip()
 
     if manifest_file.exists() and env_file.exists():
         try:
@@ -1023,9 +1023,9 @@ def rollback_model():
 
     # read what we rolled back to
     restored_model = None
-    for l in env_file.read_text("utf-8").split("\n"):
-        if l.startswith("LLM_MODEL="):
-            restored_model = l.split("=", 1)[1].strip()
+    for line in env_file.read_text("utf-8").split("\n"):
+        if line.startswith("LLM_MODEL="):
+            restored_model = line.split("=", 1)[1].strip()
 
     # update registry
     registry = _load_registry()

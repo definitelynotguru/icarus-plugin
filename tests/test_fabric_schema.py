@@ -1,5 +1,5 @@
-import yaml
 import pytest
+import yaml
 
 from fabric_schema import FabricSchemaError, build_entry_document, validate_fabric_entry
 
